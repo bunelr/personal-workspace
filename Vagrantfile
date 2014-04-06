@@ -29,8 +29,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     chef.run_list = [
       "recipe[apt::default]",
-      "recipe[vim]",
-      "recipe[workspace-setup::git-setup]"
+      "recipe[workspace-setup::git-setup]",
+      "recipe[workspace-setup::vim-setup]"
     ]
 
   end
