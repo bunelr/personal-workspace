@@ -12,4 +12,7 @@ package "git" do
   action :install
 end
 
-
+cookbook_file "/home/vagrant/.gitconfig" do
+  source ".gitconfig"
+  mode 0644
+end
