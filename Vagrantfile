@@ -5,6 +5,9 @@ VAGRANTFILE_API_VERSION = "2"
 require 'etc'
 current_user = Etc.getlogin
 
+Vagrant.require_plugin "vagrant-berkshelf"
+Vagrant.require_plugin "vagrant-omnibus"
+
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "precise64"
   # Uncomment if you don't have a box on your local machine
@@ -26,15 +29,28 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   end
   config.berkshelf.enabled = true
+  config.omnibus.chef_version = :latest
 
   config.vm.provision :chef_solo do |chef|
 
     chef.run_list = [
       "recipe[apt::default]",
       "recipe[workspace-setup::git-setup]",
-      "recipe[workspace-setup::vim-setup]"
+      "recipe[workspace-setup::vim-setup]",
+      "recipe[python::source]",
+      "recipe[workspace-setup::python-setup]"
     ]
 
+    chef.json = {
+      "python" => {
+        "version" => "3.3.0",
+        "prefix_dir" => "/opt/python3/",
+	"binary" => "/opt/python3/bin/python3",
+	"pip_location" => "/opt/python3/bin/pip3",
+        "virtualenv_location" => "/opt/python3/bin/pyvenv-3.3",
+        "install_method" => "source"
+        }
+      }	
   end
 
 end
