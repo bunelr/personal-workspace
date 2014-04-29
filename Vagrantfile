@@ -43,11 +43,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     chef.json = {
       "python" => {
-        "version" => "3.3.0",
+        "version" => "3.4.0",
         "prefix_dir" => "/opt/python3/",
 	"binary" => "/opt/python3/bin/python3",
 	"pip_location" => "/opt/python3/bin/pip3",
-        "virtualenv_location" => "/opt/python3/bin/pyvenv-3.3",
+        "virtualenv_location" => "/opt/python3/bin/pyvenv-3.4",
         "install_method" => "source"
         }
       }	

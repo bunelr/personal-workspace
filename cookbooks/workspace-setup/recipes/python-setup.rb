@@ -14,10 +14,19 @@ directory "/opt/virtual-env/" do
   action :create
 end
 
-
-python_virtualenv "/opt/virtual-env/python33/" do
+python_virtualenv "/opt/virtual-env/python34/" do
   owner "vagrant"
   group "vagrant"
   options "--upgrade" 
   action :create
+end
+
+execute "Ensure pip is installed for the venv" do
+  command "/opt/virtual-env/python34/bin/python3 -m ensurepip --upgrade"
+  action :run
+end
+
+python_pip "pyramid" do
+  virtualenv "/opt/virtual-env/python34/"
+  action :install
 end
