@@ -38,7 +38,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       "recipe[workspace-setup::git-setup]",
       "recipe[workspace-setup::vim-setup]",
       "recipe[python::source]",
-      "recipe[workspace-setup::python-setup]"
+      "recipe[workspace-setup::python-setup]",
+      "recipe[ruby_build]",
+      "recipe[rbenv::system]",
+      "recipe[rbenv::vagrant]",
+      "recipe[postgresql::server]"
     ]
 
     chef.json = {
@@ -49,8 +53,26 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	"pip_location" => "/opt/python3/bin/pip3",
         "virtualenv_location" => "/opt/python3/bin/pyvenv-3.4",
         "install_method" => "source"
+        },
+      "rbenv" => {
+        "global" => "2.0.0-p247",
+        "rubies" => ["2.0.0-p247"],
+        "gems" => {
+          "2.0.0-p247" => [
+            { "name" => "bundler"}
+          ]
         }
-      }	
+      },
+      "postgresql" => {
+        "version" => "9.3",
+        "password" => {
+          "postgres" => "postgrespwd"
+        },
+        "config" => {
+          "ssl_key_file" => "/etc/ssl/private/ssl-cert-snakeoil.key",
+          "ssl_cert_file" => "/etc/ssl/certs/ssl-cert-snakeoil.pem"
+        }
+      }
+    }	
   end
-
 end
