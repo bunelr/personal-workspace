@@ -42,7 +42,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       "recipe[ruby_build]",
       "recipe[rbenv::system]",
       "recipe[rbenv::vagrant]",
-      "recipe[postgresql::server]"
+      "recipe[postgresql::server]",
+      "recipe[nodejs]"
     ]
 
     chef.json = {
