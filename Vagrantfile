@@ -42,6 +42,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       "recipe[ruby_build]",
       "recipe[rbenv::system]",
       "recipe[rbenv::vagrant]",
+      "recipe[rbenv::user]",
       "recipe[postgresql::server]",
       "recipe[nodejs]"
     ]
@@ -62,7 +63,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           "2.0.0-p247" => [
             { "name" => "bundler"}
           ]
-        }
+        },
+        "user_installs" => [{
+	  "user"    => "vagrant",
+	  "rubies"  => ["2.0.0-p247"],
+	  "global"  => "2.0.0-p247",
+	  "gems"    => {
+	    "2.0.0-p247" => [
+	      {"name" => "bundler"}
+	      ]
+            }
+         }]
       },
       "postgresql" => {
         "version" => "9.3",
