@@ -12,3 +12,12 @@ Install the vagrant plugin berkshelf and omnibus
      vagrant plugin install vagrant-berkshelf --plugin-version 1.3.7
      vagrant plugin install vagrant-omnibus
 
+
+Then run 
+
+    vagrant up
+
+to create your vm. You can re-provision by running `vagrant --provision`
+
+Warning:
+If you're using it from a windows machine, beware of the line endings in the config files which can make the provisioning fail.
